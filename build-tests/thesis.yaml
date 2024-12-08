@@ -1,0 +1,17 @@
+record:
+  properties:
+    metadata:
+      properties:
+        title:
+          type: fulltext
+        status:
+          type: keyword
+  module:
+    qualified: thesis
+  permissions:
+    presets: [ 'everyone' ]
+  use:
+  - invenio
+  - rdm
+profiles:
+  - record
