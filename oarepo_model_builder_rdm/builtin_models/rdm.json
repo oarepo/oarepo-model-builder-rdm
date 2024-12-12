@@ -3,6 +3,7 @@
     "access": {
       "marshmallow": {
         "generate": false,
+        "field-class": "marshmallow_utils.fields.nestedattr.NestedAttribute",
         "class": "invenio_rdm_records.services.schemas.access.AccessSchema"
       },
       "sample": {
@@ -42,7 +43,7 @@
               },
               "json-schema": {
                 "type": [
-                  "date",
+                  "string",
                   "null"
                 ]
               }
@@ -54,7 +55,7 @@
               },
               "json-schema": {
                 "type": [
-                  "fulltext",
+                  "string",
                   "null"
                 ]
               }

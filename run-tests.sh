@@ -2,7 +2,7 @@
 set -e
 
 OAREPO_VERSION=${OAREPO_VERSION:-12}
-export PYTHON_VERSION=python3
+export PYTHON_VERSION=python3.12
 BUILDER_VENV=".venv-builder"
 if test -d $BUILDER_VENV ; then
 	rm -rf $BUILDER_VENV
