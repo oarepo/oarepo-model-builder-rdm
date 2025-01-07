@@ -20,13 +20,13 @@ record:
           title:
             type: keyword
     permissions:
-      presets: [ 'everyone' ]
+      presets: ['authenticated']
 
   draft: { }
 
   draft-files:
     permissions:
-      presets: [ 'everyone' ]
+      presets: ['authenticated']
 profiles:
   - record
   - draft

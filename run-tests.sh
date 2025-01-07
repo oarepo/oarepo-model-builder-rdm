@@ -2,13 +2,15 @@
 set -e
 
 OAREPO_VERSION=${OAREPO_VERSION:-12}
-export PYTHON_VERSION=python3
+PYTHON=${PYTHON:python3}
+
 BUILDER_VENV=".venv-builder"
+export INVENIO_INVENIO_RDM_ENABLED=true
 if test -d $BUILDER_VENV ; then
 	rm -rf $BUILDER_VENV
 fi
 
-$PYTHON_VERSION -m venv $BUILDER_VENV
+$PYTHON -m venv $BUILDER_VENV
 . $BUILDER_VENV/bin/activate
 pip install -U setuptools pip wheel
 pip install -e .
@@ -25,7 +27,7 @@ oarepo-compile-model ./build-tests/$MODEL.yaml --output-directory ./build-tests/
 if test -d $VENV ; then
 	rm -rf $VENV
 fi
-$PYTHON_VERSION -m venv $VENV
+$PYTHON -m venv $VENV
 . $VENV/bin/activate
 pip install -U setuptools pip wheel nrp-devtools
 $VENV/bin/nrp-devtools proxy 120 &
