@@ -2,7 +2,7 @@
 set -e
 
 OAREPO_VERSION=${OAREPO_VERSION:-12}
-PYTHON=${PYTHON:-python3}
+PYTHON=${PYTHON:-python3.12}
 
 BUILDER_VENV=".venv-builder"
 export INVENIO_INVENIO_RDM_ENABLED=true
