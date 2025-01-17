@@ -2,7 +2,9 @@
 set -e
 
 OAREPO_VERSION=${OAREPO_VERSION:-12}
-PYTHON=${PYTHON:-python3.12}
+PYTHON=${PYTHON:-python3}
+export PIP_EXTRA_INDEX_URL=https://gitlab.cesnet.cz/api/v4/projects/1408/packages/pypi/simple
+export UV_EXTRA_INDEX_URL=https://gitlab.cesnet.cz/api/v4/projects/1408/packages/pypi/simple
 
 BUILDER_VENV=".venv-builder"
 export INVENIO_INVENIO_RDM_ENABLED=true
@@ -31,8 +33,8 @@ $PYTHON -m venv $VENV
 . $VENV/bin/activate
 pip install -U setuptools pip wheel nrp-devtools
 $VENV/bin/nrp-devtools proxy 120 &
-pip install "oarepo[tests, rdm]==${OAREPO_VERSION}.*" --index-url "http://127.0.0.1:4549/simple" --extra-index-url https://pypi.org/simple
+pip install "oarepo[tests, rdm]==${OAREPO_VERSION}.*"
 
-pip install "./build-tests/${MODEL}[tests]" --index-url "http://127.0.0.1:4549/simple" --extra-index-url https://pypi.org/simple
+pip install -e "./build-tests/${MODEL}[tests]"
 pytest build-tests/$MODEL/tests
 

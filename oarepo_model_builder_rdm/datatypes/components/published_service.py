@@ -7,8 +7,14 @@ class RDMPublishedServiceComponent(DataTypeComponent):
     depends_on = [PublishedServiceComponent]
 
     def before_model_prepare(self, datatype, *, context, **kwargs):
-        pass
-        # datatype.definition["published-service"]["base-classes"] = ["invenio_rdm_records.services.services.RDMRecordService"]
-        # datatype.definition["published-service-config"]["base-classes"] = [
-        #     "oarepo_runtime.services.config.service.PermissionsPresetsConfigMixin",
-        #     "invenio_rdm_records.services.config.RDMRecordServiceConfig"]
+        # temporary solution before the new model builder
+        components_to_remove = [
+            '{{oarepo_runtime.services.files.FilesComponent}}',
+            '{{invenio_drafts_resources.services.records.components.DraftFilesComponent}}'
+        ]
+        datatype.service_config["components"] = [
+            component for component in datatype.service_config["components"]
+            if component not in components_to_remove
+        ]
+
+
