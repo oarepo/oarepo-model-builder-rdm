@@ -10,7 +10,7 @@ class RDMRecordModelComponent(DataTypeComponent):
     def before_model_prepare(self, datatype, *, context, **kwargs):
         if datatype.root.profile == "draft":
             datatype.definition["record"]["base-classes"] = ["invenio_rdm_records.records.api.RDMDraft"]
-            # datatype.definition["record"]["fields"]["media_files"] = 'FilesField(key=MediaFilesAttrConfig["_files_attr_key"],bucket_id_attr=MediaFilesAttrConfig["_files_bucket_id_attr_key"],bucket_attr=MediaFilesAttrConfig["_files_bucket_attr_key"],store=False,dump=False,file_cls={{invenio_rdm_records.records.api.RDMMediaFileDraft}},create=False,delete=False,)'
+            datatype.definition["record"]["fields"]["media_files"] = 'FilesField(key=MediaFilesAttrConfig["_files_attr_key"],bucket_id_attr=MediaFilesAttrConfig["_files_bucket_id_attr_key"],bucket_attr=MediaFilesAttrConfig["_files_bucket_attr_key"],store=False,dump=False,file_cls={{invenio_rdm_records.records.api.RDMMediaFileDraft}},create=False,delete=False,)'
         elif datatype.root.profile == "record":
             datatype.definition["record"]["base-classes"] = ["invenio_rdm_records.records.api.RDMRecord"]
-            # datatype.definition["record"]["fields"]["media_files"] = 'FilesField(key=MediaFilesAttrConfig["_files_attr_key"],bucket_id_attr=MediaFilesAttrConfig["_files_bucket_id_attr_key"],bucket_attr=MediaFilesAttrConfig["_files_bucket_attr_key"],store=False,dump=False,file_cls={{invenio_rdm_records.records.api.RDMMediaFileRecord}},create=False,delete=False,)'
+            datatype.definition["record"]["fields"]["media_files"] = 'FilesField(key=MediaFilesAttrConfig["_files_attr_key"],bucket_id_attr=MediaFilesAttrConfig["_files_bucket_id_attr_key"],bucket_attr=MediaFilesAttrConfig["_files_bucket_attr_key"],store=False,dump=False,file_cls={{invenio_rdm_records.records.api.RDMMediaFileRecord}},create=False,delete=False,)'
