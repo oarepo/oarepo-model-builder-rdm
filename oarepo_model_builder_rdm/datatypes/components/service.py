@@ -8,9 +8,6 @@ class RDMServiceComponent(DataTypeComponent):
     depends_on = [ServiceModelComponent]
 
     def before_model_prepare(self, datatype, *, context, **kwargs):
-
-        if not datatype.profile in ["record", "draft"]:
-            return
         components_to_remove = [
             '{{oarepo_runtime.services.files.FilesComponent}}',
             '{{invenio_drafts_resources.services.records.components.DraftFilesComponent}}'
@@ -19,6 +16,10 @@ class RDMServiceComponent(DataTypeComponent):
             component for component in datatype.service_config["components"]
             if component not in components_to_remove
         ]
+
+        if not datatype.profile in ["record", "draft"]:
+            return
+
         datatype.definition["service"]["base-classes"] = ["invenio_rdm_records.services.services.RDMRecordService"]
         datatype.definition["service-config"]["base-classes"] = ["oarepo_runtime.services.config.service.PermissionsPresetsConfigMixin",
                                                                  "invenio_rdm_records.services.config.RDMRecordServiceConfig"]

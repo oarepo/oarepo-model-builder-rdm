@@ -32,7 +32,6 @@ fi
 $PYTHON -m venv $VENV
 . $VENV/bin/activate
 pip install -U setuptools pip wheel nrp-devtools
-$VENV/bin/nrp-devtools proxy 120 &
 pip install "oarepo[tests, rdm]==${OAREPO_VERSION}.*"
 
 pip install -e "./build-tests/${MODEL}[tests]"
