@@ -3,7 +3,7 @@
     "pids": {
       "type": "object",
       "marshmallow": {
-         "generate": false,
+        "generate": false,
         "field": "{{marshmallow.fields.Dict}}( keys={{marshmallow_utils.fields.SanitizedUnicode}}(validate={{invenio_rdm_records.services.schemas.record.validate_scheme}}),values={{marshmallow.fields.Nested}}({{invenio_rdm_records.services.schemas.pids.PIDSchema}}),)"
       },
       "ui": {
@@ -111,6 +111,66 @@
             "skip": true
           }
         }
+      }
+    }
+  },
+  "mapping": {
+    "template": {
+      "mappings": {
+        "dynamic_templates": [
+          {
+            "pids": {
+              "path_match": "pids.*",
+              "match_mapping_type": "object",
+              "mapping": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "provider": {
+                    "type": "keyword"
+                  },
+                  "client": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "parent_pids": {
+              "path_match": "parent.pids.*",
+              "match_mapping_type": "object",
+              "mapping": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "provider": {
+                    "type": "keyword"
+                  },
+                  "client": {
+                    "type": "keyword"
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     }
   }
