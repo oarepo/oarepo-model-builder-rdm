@@ -1,10 +1,53 @@
 {
   "properties": {
+    "pids": {
+      "type": "object",
+      "marshmallow": {
+         "generate": false,
+        "field": "{{marshmallow.fields.Dict}}( keys={{marshmallow_utils.fields.SanitizedUnicode}}(validate={{invenio_rdm_records.services.schemas.record.validate_scheme}}),values={{marshmallow.fields.Nested}}({{invenio_rdm_records.services.schemas.pids.PIDSchema}}),)"
+      },
+      "ui": {
+        "marshmallow": {
+          "generate": false,
+          "read": false,
+          "write": false
+        }
+      },
+      "json-schema": {
+        "type": "object",
+        "propertyNames": {
+          "pattern": "^[a-z_-][a-z0-9_-]*$"
+        },
+        "uniqueItems": true,
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "identifier": {
+              "type": "string"
+            },
+            "provider": {
+              "type": "string"
+            },
+            "client": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "access": {
       "marshmallow": {
         "generate": false,
         "field-class": "marshmallow_utils.fields.nestedattr.NestedAttribute",
         "class": "invenio_rdm_records.services.schemas.access.AccessSchema"
+      },
+      "ui": {
+        "marshmallow": {
+          "generate": false,
+          "read": false,
+          "write": false
+        }
       },
       "sample": {
         "skip": true
