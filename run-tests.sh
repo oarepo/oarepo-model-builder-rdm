@@ -8,6 +8,7 @@ export UV_EXTRA_INDEX_URL=https://gitlab.cesnet.cz/api/v4/projects/1408/packages
 
 BUILDER_VENV=".venv-builder"
 export INVENIO_INVENIO_RDM_ENABLED=true
+
 if test -d $BUILDER_VENV ; then
 	rm -rf $BUILDER_VENV
 fi
