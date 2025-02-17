@@ -13,7 +13,8 @@ class RDMServiceComponent(DataTypeComponent):
             return
         components_to_remove = [
             '{{oarepo_runtime.services.files.FilesComponent}}',
-            '{{invenio_drafts_resources.services.records.components.DraftFilesComponent}}'
+            '{{invenio_drafts_resources.services.records.components.DraftFilesComponent}}',
+            '{{oarepo_runtime.services.components.OwnersComponent}}'
         ]
         datatype.service_config["components"] = [
             component for component in datatype.service_config["components"]
