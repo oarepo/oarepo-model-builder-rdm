@@ -15,4 +15,13 @@ class RDMDraftParentComponent(DataTypeComponent):
 
     def before_model_prepare(self, datatype, *, context, **kwargs):
         if "draft-parent-record" in datatype.definition:
-            datatype.definition["draft-parent-record"]["base-classes"] = ["invenio_rdm_records.records.api.RDMParent"]
+            if "base-classes" in datatype.definition[
+                "draft-parent-record"] and "invenio_drafts_resources.records.api.ParentRecord" in \
+                    datatype.definition["draft-parent-record"]["base-classes"]:
+                datatype.definition["draft-parent-record"]["base-classes"].remove(
+                    "invenio_drafts_resources.records.api.ParentRecord")
+                datatype.definition["draft-parent-record"]["base-classes"].append(
+                    "invenio_rdm_records.records.api.RDMParent")
+            else:
+                datatype.definition["draft-parent-record"]["base-classes"] = [
+                    "invenio_rdm_records.records.api.RDMParent"]

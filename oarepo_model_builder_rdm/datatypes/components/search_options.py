@@ -11,7 +11,17 @@ class RDMSearchOptionsModelComponent(DataTypeComponent):
             module = datatype.definition["module"]["qualified"]
             record_search_prefix = datatype.definition["module"]["prefix"]
             datatype.definition["search-options"]["versions"] = {"class":f"{module}.{record_search_prefix}VersionsSearchOptions","base-classes": ["invenio_rdm_records.services.config.RDMSearchVersionsOptions"]}
-            datatype.definition["search-options"]["base-classes"] = ["oarepo_runtime.services.search.I18nRDMSearchOptions"]
+
+            if "base-classes" in datatype.definition["record"] and "invenio_records_resources.services.SearchOptions{InvenioSearchOptions}" in datatype.definition["search-options"]["base-classes"]:
+                datatype.definition["search-options"]["base-classes"].remove("invenio_records_resources.services.SearchOptions{InvenioSearchOptions}")
+                datatype.definition["search-options"]["base-classes"].append("oarepo_runtime.services.search.I18nRDMSearchOptions")
+            else:
+                datatype.definition["search-options"]["base-classes"] = ["oarepo_runtime.services.search.I18nRDMSearchOptions"]
+
         elif datatype.root.profile == "draft":
-            datatype.definition["search-options"]["base-classes"] = ["oarepo_runtime.services.search.I18nRDMDraftsSearchOptions"]
+            if "base-classes" in datatype.definition["record"] and "invenio_drafts_resources.services.records.config.SearchDraftsOptions{InvenioSearchDraftsOptions}" in datatype.definition["search-options"]["base-classes"]:
+                datatype.definition["search-options"]["base-classes"].remove("invenio_drafts_resources.services.records.config.SearchDraftsOptions{InvenioSearchDraftsOptions}")
+                datatype.definition["search-options"]["base-classes"].append("oarepo_runtime.services.search.I18nRDMDraftsSearchOptions")
+            else:
+                datatype.definition["search-options"]["base-classes"] = ["oarepo_runtime.services.search.I18nRDMDraftsSearchOptions"]
 

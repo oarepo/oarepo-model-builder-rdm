@@ -20,6 +20,22 @@ class RDMServiceComponent(DataTypeComponent):
             component for component in datatype.service_config["components"]
             if component not in components_to_remove
         ]
-        datatype.definition["service"]["base-classes"] = ["invenio_rdm_records.services.services.RDMRecordService"]
-        datatype.definition["service-config"]["base-classes"] = ["oarepo_runtime.services.config.service.PermissionsPresetsConfigMixin",
+        if "base-classes" in datatype.definition["service"] and "invenio_records_resources.services.RecordService{InvenioRecordService}" in \
+                datatype.definition["service"]["base-classes"]:
+            datatype.definition["service"]["base-classes"].remove(
+                "invenio_records_resources.services.RecordService{InvenioRecordService}")
+            datatype.definition["service"]["base-classes"].append(
+                "invenio_rdm_records.services.services.RDMRecordService")
+        else:
+            datatype.definition["service"]["base-classes"] = [
+                "invenio_rdm_records.services.services.RDMRecordService"]
+
+        if "base-classes" in datatype.definition["service-config"] and "invenio_records_resources.services.RecordServiceConfig{InvenioRecordServiceConfig}" in \
+                datatype.definition["service-config"]["base-classes"]:
+            datatype.definition["service-config"]["base-classes"].remove(
+                "invenio_records_resources.services.RecordServiceConfig{InvenioRecordServiceConfig}")
+            datatype.definition["service-config"]["base-classes"].append(
+                "invenio_rdm_records.services.config.RDMRecordServiceConfig")
+        else:
+            datatype.definition["service-config"]["base-classes"] = ["oarepo_runtime.services.config.service.PermissionsPresetsConfigMixin",
                                                                  "invenio_rdm_records.services.config.RDMRecordServiceConfig"]
