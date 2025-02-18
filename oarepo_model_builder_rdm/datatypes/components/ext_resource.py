@@ -9,7 +9,6 @@ class RDMExtResourceModelComponent(DataTypeComponent):
         if not datatype.profile == "record":
             return
         ext_resource = datatype.definition['ext-resource']
-        print(ext_resource)
         ext_resource['service-kwargs']["pids_service"] = "{{invenio_rdm_records.services.pids.PIDsService}}(config_class, {{invenio_rdm_records.services.pids.PIDManager}})"
         datatype.definition['ext-resource'] = ext_resource
 
