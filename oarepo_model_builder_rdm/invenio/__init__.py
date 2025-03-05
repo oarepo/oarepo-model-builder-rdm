@@ -4,4 +4,5 @@ TEMPLATES = {
     "rdm-draft-record": "templates/rdm_draft_record.py.jinja2",
     "rdm-record-search-options": "templates/rdm_record_search_options.py.jinja2",
     "rdm-ext": "templates/rdm_ext.py.jinja2",
+    "rdm-config": "templates/rdm_config.py.jinja2",
 }
