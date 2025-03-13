@@ -14,9 +14,8 @@ RDM_RECORD_SERVICE = "invenio_rdm_records.services.services.RDMRecordService"
 PLAIN_SERVICE_CONFIG = (
     "invenio_records_resources.services.RecordServiceConfig{InvenioRecordServiceConfig}"
 )
-RDM_SERVICE_CONFIG = "invenio_rdm_records.services.config.RDMRecordServiceConfig"
-
 DRAFT_SERVICE_CONFIG = "invenio_drafts_resources.services.RecordServiceConfig{InvenioRecordDraftsServiceConfig}"
+RDM_SERVICE_CONFIG = "invenio_rdm_records.services.config.RDMRecordServiceConfig"
 
 
 class RDMServiceComponent(DataTypeComponent):
