@@ -3,6 +3,8 @@ from oarepo_model_builder.datatypes.components.model import ServiceModelComponen
 from oarepo_model_builder.datatypes.model import ModelDataType
 from oarepo_model_builder_files.datatypes.components import ParentRecordComponent
 
+from .utils import replace_base_class
+
 PLAIN_RECORD_SERVICE = (
     "invenio_records_resources.services.RecordService{InvenioRecordService}"
 )
@@ -36,28 +38,20 @@ class RDMServiceComponent(DataTypeComponent):
             for component in datatype.service_config["components"]
             if component not in components_to_remove
         ]
-        service_base_classes = datatype.definition["service"].setdefault(
-            "base-classes", []
+        replace_base_class(
+            datatype.definition["service"], PLAIN_RECORD_SERVICE, RDM_RECORD_SERVICE
         )
-        if service_base_classes:
-            if PLAIN_RECORD_SERVICE in service_base_classes:
-                idx = service_base_classes.index(PLAIN_RECORD_SERVICE)
-                service_base_classes[idx] = RDM_RECORD_SERVICE
-            if DRAFT_RECORD_SERVICE in service_base_classes:
-                idx = service_base_classes.index(DRAFT_RECORD_SERVICE)
-                service_base_classes[idx] = RDM_RECORD_SERVICE
-        else:
-            service_base_classes.append(RDM_RECORD_SERVICE)
+        replace_base_class(
+            datatype.definition["service"], DRAFT_RECORD_SERVICE, RDM_RECORD_SERVICE
+        )
 
-        config_base_classes = datatype.definition["service-config"].setdefault(
-            "base-classes", []
+        replace_base_class(
+            datatype.definition["service-config"],
+            PLAIN_SERVICE_CONFIG,
+            RDM_SERVICE_CONFIG,
         )
-        if config_base_classes:
-            if PLAIN_SERVICE_CONFIG in config_base_classes:
-                idx = config_base_classes.index(PLAIN_SERVICE_CONFIG)
-                config_base_classes[idx] = RDM_SERVICE_CONFIG
-            if DRAFT_SERVICE_CONFIG in config_base_classes:
-                idx = config_base_classes.index(DRAFT_SERVICE_CONFIG)
-                config_base_classes[idx] = RDM_SERVICE_CONFIG
-        else:
-            config_base_classes.append(RDM_SERVICE_CONFIG)
+        replace_base_class(
+            datatype.definition["service-config"],
+            DRAFT_SERVICE_CONFIG,
+            RDM_SERVICE_CONFIG,
+        )
