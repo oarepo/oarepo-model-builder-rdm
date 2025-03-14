@@ -3,6 +3,8 @@ from typing import Any
 from oarepo_model_builder.datatypes import DataTypeComponent, ModelDataType
 from oarepo_model_builder.datatypes.components import UIMarshmallowModelComponent
 
+from .utils import replace_base_class
+
 
 class RDMUIMarshmallowModelComponent(DataTypeComponent):
     eligible_datatypes = [ModelDataType]
@@ -12,16 +14,8 @@ class RDMUIMarshmallowModelComponent(DataTypeComponent):
         self, datatype: Any, *, context: dict[str, Any], **kwargs: Any
     ):
         if datatype.root.profile == "record":
-            marshmallow_base_classes = datatype.definition["ui"]["marshmallow"][
-                "base-classes"
-            ]
-            if (
-                "oarepo_runtime.services.schema.ui.InvenioUISchema"
-                in marshmallow_base_classes
-            ):
-                idx = marshmallow_base_classes.index(
-                    "oarepo_runtime.services.schema.ui.InvenioUISchema"
-                )
-                marshmallow_base_classes[idx] = (
-                    "oarepo_runtime.services.schema.ui.InvenioRDMUISchema"
-                )
+            replace_base_class(
+                datatype.definition["ui"]["marshmallow"],
+                "oarepo_runtime.services.schema.ui.InvenioUISchema",
+                "oarepo_runtime.services.schema.ui.InvenioRDMUISchema",
+            )
