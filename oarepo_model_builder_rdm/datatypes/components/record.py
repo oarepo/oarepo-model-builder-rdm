@@ -38,7 +38,7 @@ class RDMRecordModelComponent(DataTypeComponent):
             replace_base_class(
                 # is this needed in record profile?
                 datatype.definition["record"],
-                "invenio_drafts_resources.records.api.Draft{InvenioDraft}",
+                "invenio_drafts_resources.records.api.Record{InvenioRecord}",
                 "invenio_rdm_records.records.api.RDMRecord",
             )
             replace_base_class(
