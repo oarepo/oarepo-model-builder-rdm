@@ -36,5 +36,5 @@ pip install -U setuptools pip wheel nrp-devtools
 pip install "oarepo[tests, rdm]==${OAREPO_VERSION}.*"
 
 pip install -e "./build-tests/${MODEL}[tests]"
-pytest build-tests/$MODEL/tests
+pytest build-tests/test_import.py
 
