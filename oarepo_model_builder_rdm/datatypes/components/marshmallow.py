@@ -15,6 +15,11 @@ class RDMMarshmallowModelComponent(DataTypeComponent):
     ):
         if datatype.root.profile == "record":
             replace_base_class(
+                datatype.definition["parent-record-marshmallow"],
+                "oarepo_workflows.services.records.schema.WorkflowParentSchema",
+                "oarepo_workflows.services.records.schema.RDMWorkflowParentSchema",
+            )
+            replace_base_class(
                 datatype.definition["marshmallow"],
                 "oarepo_runtime.services.schema.marshmallow.BaseRecordSchema",
                 "oarepo_runtime.services.schema.marshmallow.RDMBaseRecordSchema",

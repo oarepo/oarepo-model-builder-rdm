@@ -23,12 +23,22 @@ record:
       presets: ['authenticated']
 
   draft: { }
+  draft-parent-record:
+    fields:
+      workflow: "{{oarepo_workflows.records.systemfields.workflow.WorkflowField}}()"
 
   draft-files:
     permissions:
       presets: ['authenticated']
+
 profiles:
   - record
   - draft
   - files
   - draft_files
+plugins:
+  builder:
+    disable:
+      - invenio_test_resource
+      - invenio_test_service
+      - invenio_tests_conftest
