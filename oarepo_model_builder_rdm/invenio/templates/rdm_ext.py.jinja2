@@ -1,10 +1,19 @@
 class {{ vars.ext|class_header }}:
     def init_app_callback_rdm_models(self, app):
         rdm_model_config = {
+            "service_id": "{{ vars.service_config.service_id }}",
+
+            # deprecated
             "model_service": "{{ vars.service.class }}",
+            # deprecated
             "service_config": "{{ vars.service_config.class }}",
-            "ui_resource_config": "ui.{{ vars.module.qualified }}.{{vars.module.prefix}}UIResourceConfig",
+
+            "api_service": "{{ vars.service.class }}",
+            "api_service_config": "{{ vars.service_config.class }}",
+            "api_resource": "{{ vars.resource.class }}",
             "api_resource_config": "{{ vars.resource_config.class }}",
+
+            "ui_resource_config": "ui.{{ vars.module.qualified }}.{{vars.module.prefix}}UIResourceConfig",
         }
 
         app.config.setdefault('GLOBAL_SEARCH_MODELS', [])
