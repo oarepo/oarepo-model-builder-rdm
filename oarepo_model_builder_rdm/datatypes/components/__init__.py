@@ -1,5 +1,6 @@
 from .draft_record import RDMDraftParentComponent
 from .ext_resource import RDMExtResourceModelComponent
+from .links import RDMLinksComponent
 from .marshmallow import RDMMarshmallowModelComponent
 from .record import RDMRecordModelComponent
 from .search_options import RDMSearchOptionsModelComponent
@@ -14,4 +15,5 @@ RDM_COMPONENTS = [
     RDMMarshmallowModelComponent,
     RDMSearchOptionsModelComponent,
     RDMUIMarshmallowModelComponent,
+    RDMLinksComponent,
 ]
