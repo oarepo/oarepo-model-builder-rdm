@@ -62,4 +62,14 @@ class RDMLinksComponent(DataTypeComponent):
                         Import("invenio_rdm_records.services.config._groups_enabled"),
                     ],
                 ),
+                Link(
+                    name="access_settings",
+                    link_class="RecordLink",
+                    link_args=[
+                        '"{+api}/records/{id}/access"',
+                    ],
+                    imports=[
+                        Import("invenio_records_resources.services.RecordLink"),
+                    ],
+                ),
             ]
