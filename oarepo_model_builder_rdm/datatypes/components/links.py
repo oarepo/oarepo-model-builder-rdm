@@ -25,9 +25,11 @@ class RDMLinksComponent(DataTypeComponent):
                     link_class="RecordLink",
                     link_args=[
                         '"{+api}/records/{id}/access/links"',
+                        'when=has_permission("manage")',
                     ],
                     imports=[
                         Import("invenio_records_resources.services.RecordLink"),
+                        Import("oarepo_runtime.services.config.has_permission"),
                     ],
                 ),
                 Link(
@@ -35,9 +37,11 @@ class RDMLinksComponent(DataTypeComponent):
                     link_class="RecordLink",
                     link_args=[
                         '"{+api}/records/{id}/access/grants"',
+                        'when=has_permission("manage")',
                     ],
                     imports=[
                         Import("invenio_records_resources.services.RecordLink"),
+                        Import("oarepo_runtime.services.config.has_permission"),
                     ],
                 ),
                 Link(
@@ -45,9 +49,11 @@ class RDMLinksComponent(DataTypeComponent):
                     link_class="RecordLink",
                     link_args=[
                         '"{+api}/records/{id}/access/users"',
+                        'when=has_permission("manage")',
                     ],
                     imports=[
                         Import("invenio_records_resources.services.RecordLink"),
+                        Import("oarepo_runtime.services.config.has_permission"),
                     ],
                 ),
                 Link(
@@ -55,11 +61,13 @@ class RDMLinksComponent(DataTypeComponent):
                     link_class="RecordLink",
                     link_args=[
                         '"{+api}/records/{id}/access/groups"',
-                        'when=_groups_enabled',
+                        'when=to_oarepo_condition(_groups_enabled) & has_permission("manage")',
                     ],
                     imports=[
                         Import("invenio_records_resources.services.RecordLink"),
+                        Import("oarepo_runtime.services.config.has_permission"),
                         Import("invenio_rdm_records.services.config._groups_enabled"),
+                        Import("oarepo_runtime.services.config.link_conditions.to_oarepo_condition")
                     ],
                 ),
                 Link(
@@ -67,9 +75,11 @@ class RDMLinksComponent(DataTypeComponent):
                     link_class="RecordLink",
                     link_args=[
                         '"{+api}/records/{id}/access"',
+                        'when=has_permission("manage")',
                     ],
                     imports=[
                         Import("invenio_records_resources.services.RecordLink"),
+                        Import("oarepo_runtime.services.config.has_permission"),
                     ],
                 ),
             ]
