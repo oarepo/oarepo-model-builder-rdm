@@ -21,6 +21,16 @@ class RDMLinksComponent(DataTypeComponent):
             section.config.setdefault("links_item", {})
             section.config["links_item"] += [
                 Link(
+                    name="access_request",
+                    link_class="RecordLink",
+                    link_args=[
+                        '"{+api}/records/{id}/access/request"',
+                    ],
+                    imports=[
+                        Import("invenio_records_resources.services.RecordLink"),
+                    ],
+                ),
+                Link(
                     name="access_links",
                     link_class="RecordLink",
                     link_args=[
@@ -71,7 +81,7 @@ class RDMLinksComponent(DataTypeComponent):
                     ],
                 ),
                 Link(
-                    name="access_settings",
+                    name="access",
                     link_class="RecordLink",
                     link_args=[
                         '"{+api}/records/{id}/access"',
