@@ -152,10 +152,12 @@ Funding:
             type: fulltext+keyword
         - key: identifiers
           model:
-            type: object
-            properties:
-              identifier: keyword
-              scheme: keyword
+            type: array
+            items:
+              type: object
+              properties:
+                identifier: keyword
+                scheme: keyword
         - key: subjects
           model:
             type: array
