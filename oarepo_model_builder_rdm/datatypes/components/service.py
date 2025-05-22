@@ -11,7 +11,7 @@ PLAIN_RECORD_SERVICE = (
 DRAFT_RECORD_SERVICE = (
     "invenio_drafts_resources.services.RecordService{InvenioRecordService}"
 )
-RDM_RECORD_SERVICE = "invenio_rdm_records.services.services.RDMRecordService"
+RDM_RECORD_SERVICE = "oarepo_runtime.services.service.SearchAllRecordsService"
 
 PLAIN_SERVICE_CONFIG = (
     "invenio_records_resources.services.RecordServiceConfig{InvenioRecordServiceConfig}"
@@ -55,3 +55,4 @@ class RDMServiceComponent(DataTypeComponent):
             DRAFT_SERVICE_CONFIG,
             RDM_SERVICE_CONFIG,
         )
+        datatype.definition["service-config"]["base-classes"].insert(0, "oarepo_runtime.resources.resource.SearchAllResourceMixin")
