@@ -21,65 +21,83 @@ class RDMLinksComponent(DataTypeComponent):
             section.config.setdefault("links_item", {})
             section.config["links_item"] += [
                 Link(
-                    name="access_links",
-                    link_class="RecordLink",
+                    name="archive",
+                    link_class="PermissionRequiringLink",
                     link_args=[
-                        '"{+api}/records/{id}/access/links"',
-                        'when=has_permission("manage")',
+                        'supercls_links["archive"], "read_files"',
                     ],
                     imports=[
-                        Import("invenio_records_resources.services.RecordLink"),
-                        Import("oarepo_runtime.services.config.has_permission"),
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
+                    ],
+                ),
+                Link(
+                    name="archive_media",
+                    link_class="PermissionRequiringLink",
+                    link_args=[
+                        'supercls_links["archive_media"], "read_files"',
+                    ],
+                    imports=[
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
+                    ],
+                ),
+                Link(
+                    name="access_links",
+                    link_class="PermissionRequiringLink",
+                    link_args=[
+                        'supercls_links["access_links"], "manage"',
+                    ],
+                    imports=[
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
                     ],
                 ),
                 Link(
                     name="access_grants",
-                    link_class="RecordLink",
+                    link_class="PermissionRequiringLink",
                     link_args=[
-                        '"{+api}/records/{id}/access/grants"',
-                        'when=has_permission("manage")',
+                        'supercls_links["access_grants"], "manage"',
                     ],
                     imports=[
-                        Import("invenio_records_resources.services.RecordLink"),
-                        Import("oarepo_runtime.services.config.has_permission"),
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
                     ],
                 ),
                 Link(
                     name="access_users",
-                    link_class="RecordLink",
+                    link_class="PermissionRequiringLink",
                     link_args=[
-                        '"{+api}/records/{id}/access/users"',
-                        'when=has_permission("manage")',
+                        'supercls_links["access_users"], "manage"',
                     ],
                     imports=[
-                        Import("invenio_records_resources.services.RecordLink"),
-                        Import("oarepo_runtime.services.config.has_permission"),
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
                     ],
                 ),
                 Link(
                     name="access_groups",
-                    link_class="RecordLink",
+                    link_class="PermissionRequiringLink",
                     link_args=[
-                        '"{+api}/records/{id}/access/groups"',
-                        'when=composite_condition(_groups_enabled) & has_permission("manage")',
+                        'supercls_links["access_groups"], "manage"',
                     ],
                     imports=[
-                        Import("invenio_records_resources.services.RecordLink"),
-                        Import("oarepo_runtime.services.config.has_permission"),
-                        Import("invenio_rdm_records.services.config._groups_enabled"),
-                        Import("oarepo_runtime.services.config.link_conditions.composite_condition")
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
                     ],
                 ),
                 Link(
                     name="access",
-                    link_class="RecordLink",
+                    link_class="PermissionRequiringLink",
                     link_args=[
-                        '"{+api}/records/{id}/access"',
-                        'when=has_permission("manage")',
+                        'supercls_links["access"], "manage"',
                     ],
                     imports=[
-                        Import("invenio_records_resources.services.RecordLink"),
-                        Import("oarepo_runtime.services.config.has_permission"),
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
+                    ],
+                ),
+                Link(
+                    name="communities-suggestions",
+                    link_class="PermissionRequiringLink",
+                    link_args=[
+                        'supercls_links["communities-suggestions"], "add_community"',
+                    ],
+                    imports=[
+                        Import("oarepo_runtime.services.records.links.PermissionRequiringLink"),
                     ],
                 ),
             ]
