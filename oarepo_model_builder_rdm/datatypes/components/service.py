@@ -55,4 +55,4 @@ class RDMServiceComponent(DataTypeComponent):
             DRAFT_SERVICE_CONFIG,
             RDM_SERVICE_CONFIG,
         )
-        datatype.definition["service-config"]["base-classes"].insert(0, "oarepo_runtime.resources.resource.SearchAllResourceMixin")
+        datatype.definition["service-config"]["base-classes"].insert(0, "oarepo_runtime.services.config.service.SearchAllResourceMixin")
