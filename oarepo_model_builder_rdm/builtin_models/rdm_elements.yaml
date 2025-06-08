@@ -191,7 +191,7 @@ Subject:
       class: oarepo_runtime.services.schema.rdm_ui.RDMSubjectUISchema
       generate: false
   marshmallow:
-    class: oarepo_runtime.services.schema.rdm.SubjectSchema
+    class: oarepo_runtime.services.schema.rdm.RDMSubjectSchema
     generate: false
   properties:
     id:
