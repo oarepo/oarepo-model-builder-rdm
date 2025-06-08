@@ -180,3 +180,28 @@ Funding:
       label.cs: Číslo projektu
       label.en: Award number
       class: oarepo_runtime.records.relations.UnstrictPIDRelation
+
+Subject:
+  $id: subject
+  label.cs: Předmět
+  label.en: Subject
+  ui:
+    detail: subject
+    marshmallow:
+      class: oarepo_runtime.services.schema.rdm_ui.RDMSubjectUISchema
+      generate: false
+  marshmallow:
+    class: oarepo_runtime.services.schema.rdm.SubjectSchema
+    generate: false
+  properties:
+    id:
+      type: keyword
+      label.cs: Identifikátor předmětu
+      label.en: Subject Identifier
+
+    subject:
+      # TODO: in RDM, subjects are not yet multilingual in their serialization to record
+      # (they are internally), this probably will change in the future
+      type: multilingual
+      label.cs: Předmět
+      label.en: Subject
