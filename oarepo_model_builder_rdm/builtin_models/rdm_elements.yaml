@@ -46,34 +46,9 @@ Creatibutor:
           model:
             type: keyword
     person_or_org:
+      use: rdm-elements#person_or_org
       label.cs: Osoba nebo organizace
       label.en: Person or Organization
-      properties:
-        name:
-          type: keyword
-          label.cs: Plné jméno
-          label.en: Full Name
-        type:
-          type: keyword
-          enum: [personal, organizational]
-          label.cs: Typ
-          label.en: Type
-        given_name:
-          type: keyword
-          label.cs: Jméno
-          label.en: Name
-        family_name:
-          type: keyword
-          label.cs: Příjmení
-          label.en: Family Name
-        identifiers[]:
-          ^label.cs: Identifikátory
-          ^label.en: Identifiers
-          use: rdm-elements#identifier
-          marshmallow:
-            generate: false
-            read: false
-            write: false
       marshmallow:
         generate: false
         read: false
@@ -205,3 +180,39 @@ Subject:
       type: multilingual
       label.cs: Předmět
       label.en: Subject
+
+PersonOrOrg:
+  $id: person_or_org
+  properties:
+    name:
+      type: keyword
+      label.cs: Plné jméno
+      label.en: Full Name
+    type:
+      type: keyword
+      enum: [personal, organizational]
+      label.cs: Typ
+      label.en: Type
+    given_name:
+      type: keyword
+      label.cs: Jméno
+      label.en: Name
+    family_name:
+      type: keyword
+      label.cs: Příjmení
+      label.en: Family Name
+    identifiers[]:
+      ^label.cs: Identifikátory
+      ^label.en: Identifiers
+      use: rdm-elements#identifier
+      marshmallow:
+        generate: false
+        read: false
+        write: false
+  marshmallow:
+    class: invenio_rdm_records.services.schemas.metadata.PersonOrOrganizationSchema
+    generate: false
+  ui:
+    marshmallow:
+      class: oarepo_runtime.services.schema.rdm_ui.RDMPersonOrOrganizationUISchema
+      generate: false
